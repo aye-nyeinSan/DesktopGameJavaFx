@@ -23,7 +23,7 @@ public class EquipPane extends ScrollPane {
     private Weapon equippedWeapon;
     private Armor equippedArmor;
 
-    Label weaponLbl,armorLbl;
+
 
 
     public EquipPane() {
@@ -44,15 +44,27 @@ public class EquipPane extends ScrollPane {
         weaponImgGroup.getChildren().add(bg1);
         armorImgGroup.getChildren().add(bg2);
 
+        Label weaponLbl,armorLbl;
         if (equippedWeapon != null) {
 
-            weaponLbl = new Label("Weapon:\n"+ equippedWeapon.getName());
+            weaponLbl = new Label("Weapon: \n"+ equippedWeapon.getName());
             weaponImg.setImage(new Image(Launcher.class.getResource(equippedWeapon.getImgpath()).toString()));
             weaponImgGroup.getChildren().add(weaponImg);
         }else {
             weaponLbl = new Label("Weapon:");
             weaponImg.setImage(new Image(Launcher.class.getResource("assets/blank.png").toString()));
         }
+        if (equippedArmor != null) {
+
+            armorLbl= new Label("Armor:\n"+ equippedArmor.getName());
+            armorImg.setImage(new Image(Launcher.class.getResource(equippedArmor.getImgpath()).toString()));
+            armorImgGroup.getChildren().add(armorImg);
+        }else {
+            armorLbl = new Label("Armor:");
+            armorImg.setImage(new Image(Launcher.class.getResource("assets/blank.png").toString()));
+        }
+
+
         weaponImgGroup.setOnDragOver(new EventHandler<DragEvent>() {
             @Override
         public void handle(DragEvent e) {onDragOver(e,"Weapon"); }});
@@ -69,22 +81,15 @@ public class EquipPane extends ScrollPane {
             public void handle(DragEvent e) {onDragDropped(e,armorLbl,armorImgGroup); }});
 
 
-        if (equippedArmor != null) {
 
-            armorLbl= new Label("Armor:\n"+ equippedArmor.getName());
-            armorImg.setImage(new Image(Launcher.class.getResource(equippedArmor.getImgpath()).toString()));
-        }else {
-            armorLbl = new Label("Armor:");
-            armorImg.setImage(new Image(Launcher.class.getResource("assets/blank.png").toString()));
-        }
         equipmentInfoPane.getChildren().addAll(weaponLbl,weaponImgGroup,armorLbl,armorImgGroup);
         return equipmentInfoPane;
 
 
     }
     public void drawPane(Weapon equippedWeapon,Armor equippedArmor){
-        this.equippedArmor=equippedArmor;
-        this.equippedWeapon=equippedWeapon;
+        this.equippedArmor = equippedArmor;
+        this.equippedWeapon = equippedWeapon;
 
         Pane equipmentInfo = getDetailsPane();
         this.setStyle("-fx-background-color:Red;");

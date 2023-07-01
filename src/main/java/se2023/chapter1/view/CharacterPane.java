@@ -12,8 +12,7 @@ import javafx.scene.layout.VBox;
 import se2023.chapter1.Launcher;
 import se2023.chapter1.controller.AllCustomHandler;
 import se2023.chapter1.model.character.BasedCharacter;
-import se2023.chapter1.model.item.Armor;
-import se2023.chapter1.model.item.Weapon;
+
 
 public class CharacterPane extends ScrollPane {
     private BasedCharacter character;

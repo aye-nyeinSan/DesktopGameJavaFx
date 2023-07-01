@@ -10,13 +10,13 @@ public class GenCharacter {
     public static BasedCharacter setUpCharacter() {
         BasedCharacter character;
         Random rand=new Random();
-        int type=rand.nextInt(2)+1;
-        int basedDef=rand.nextInt(50)+1;
+        int type=rand.nextInt(2)+1;//generate between 1 and 2(inclusive) // 1 to 3
+        int basedDef=rand.nextInt(50)+1; //generate between 1 and 50(inclusive) 1 to 51
         int basedRes=rand.nextInt(50)+1;
-        if(type== 1) {
-            character=new MagicalCharacter("MagicChar1","assets/wizard.png",basedDef,basedRes);
+        if(type == 1) {
+            character=new MagicalCharacter("MagicChar1","assets/wizard.png", basedDef ,basedRes );
         }else{
-            character=new PhysicalCharacter("PhysicalChar1","assets/knight.png",basedRes,basedRes);
+            character=new PhysicalCharacter("PhysicalChar1","assets/knight.png", basedRes, basedRes );
         }
         return character;
     }

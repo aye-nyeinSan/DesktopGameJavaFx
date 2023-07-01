@@ -9,6 +9,7 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import se2023.chapter1.Launcher;
 import se2023.chapter1.model.item.BasedEquipment;
 
@@ -26,17 +27,23 @@ public class InventoryPane extends ScrollPane {
             Pane inventoryInfoPane = new HBox(10);
             inventoryInfoPane.setBorder(null);
             inventoryInfoPane.setPadding(new Insets(25,25,25,25));
+
             if(equipmentArray!= null){
                 ImageView[] imageViewList= new ImageView[equipmentArray.size()];
                 for (int i = 0; i <equipmentArray.size();i++){
                     imageViewList[i] =new ImageView();
                     imageViewList[i].setImage(new Image(Launcher.class.getResource(equipmentArray.get(i).getImgpath()).toString()));
-                    int finalI=i;
+                    int finalI = i;
+
+                     //process start at dragging the picture
                     imageViewList[i].setOnDragDetected(new EventHandler<MouseEvent>() {
-                        public void handle(MouseEvent event){
+                        @Override
+                        public void handle(MouseEvent event) {
                             onDragDetected(event,equipmentArray.get(finalI),imageViewList[finalI]);
                         }
                     });
+
+                    //Delete img in inventory when drag done
                     imageViewList[i].setOnDragDone(new EventHandler<DragEvent>() {
                         @Override
                                 public void handle(DragEvent event) {onEquipDone(event);}
@@ -45,6 +52,7 @@ public class InventoryPane extends ScrollPane {
                 }
                 inventoryInfoPane.getChildren().addAll(imageViewList);
             }
+            else { System.out.print("There is no item in the inventory.");}
 
             return inventoryInfoPane;
         }

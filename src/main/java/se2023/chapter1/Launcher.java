@@ -18,36 +18,14 @@ import se2023.chapter1.view.InventoryPane;
 import java.util.ArrayList;
 
 public class Launcher extends Application {
-    public static Weapon getEquippedWeapon() {
-        return equippedWeapon;
-    }
 
-    public static void setEquippedWeapon(Weapon equippedWeapons) {
-        equippedWeapon = equippedWeapons;
-    }
-
-    public static Armor getEquippedArmor() {
-        return equippedArmor;
-    }
-
-    public static void setEquippedArmor(Armor equippedArmors) {
-        equippedArmor = equippedArmors;
-    }
-
-    public static ArrayList<BasedEquipment> getAllEquipment() {
-        return allEquiment;
-    }
-
-    public static void setAllEquipment(ArrayList<BasedEquipment> allEquipments) {
-        allEquiment = allEquipments;
-    }
 
     public static void main(String[] args) {
         launch();
     }
     private static Scene mainScene;
     private static BasedCharacter mainCharacter = null;
-    private static ArrayList<BasedEquipment> allEquiment = null ;
+    private static ArrayList<BasedEquipment> allEquipments = null ;
     private static Weapon equippedWeapon=null;
     private static Armor equippedArmor= null;
     private static CharacterPane characterPane=null;
@@ -56,14 +34,14 @@ public class Launcher extends Application {
     @Override
     public  void start(Stage stage) throws Exception{
         stage.setTitle("Intro to RPG");
-        stage.setResizable(false);
-        stage.show();
+        stage.setResizable(false); // cannot resize the whole scene
+
         mainCharacter= GenCharacter.setUpCharacter();
-        allEquiment = GenItemList.setUpItemList();
+        allEquipments = GenItemList.setUpItemList();
         Pane mainPane = getMainPane();
         mainScene= new Scene(mainPane);
         stage.setScene(mainScene);
-
+        stage.show();
 
     }
     public Pane getMainPane() {
@@ -81,9 +59,32 @@ public class Launcher extends Application {
     public  static void refreshPane() {
         characterPane.drawPane(mainCharacter);
         equipPane.drawPane(equippedWeapon,equippedArmor);
-        inventoryPane.drawPane(allEquiment);
+        inventoryPane.drawPane(allEquipments);
     }
     public static BasedCharacter getMainCharacter() {return mainCharacter; }
     public static void setMainCharacter(BasedCharacter mainCharacter) {Launcher.mainCharacter = mainCharacter;}
+    public static Weapon getEquippedWeapon() {
+        return equippedWeapon;
+    }
+
+    public static void setEquippedWeapon(Weapon equippedWeapons) {
+        equippedWeapon = equippedWeapons;
+    }
+
+    public static Armor getEquippedArmor() {
+        return equippedArmor;
+    }
+
+    public static void setEquippedArmor(Armor equippedArmors) {
+        equippedArmor = equippedArmors;
+    }
+
+    public static ArrayList<BasedEquipment> getAllEquipment() {
+        return allEquipments;
+    }
+
+    public static void setAllEquipment(ArrayList<BasedEquipment> allEquipments) {
+        allEquipments = allEquipments;
+    }
 
 }
