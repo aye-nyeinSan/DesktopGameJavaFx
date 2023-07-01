@@ -1,0 +1,27 @@
+package se2023.chapter1.model.item;
+
+import javafx.scene.input.DataFormat;
+
+import java.io.Serializable;
+
+public class BasedEquipment implements Serializable {
+    public static final DataFormat DATA_FORMAT= new DataFormat("src.main.java.se2023.chapter1.model.item.BasedEquipment");
+    protected String name,imgpath;
+
+    public String getName() {
+        return name;
+    }
+
+    public String getImgpath() {
+        return imgpath;
+
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setImgpath(String imgpath) {
+        this.imgpath = imgpath;
+    }
+}
