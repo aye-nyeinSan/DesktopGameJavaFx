@@ -30,7 +30,7 @@ public class InventoryPane extends ScrollPane {
 
             if(equipmentArray!= null){
                 ImageView[] imageViewList= new ImageView[equipmentArray.size()];
-                for (int i = 0; i <equipmentArray.size();i++){
+                for (int i = 0; i < equipmentArray.size(); i++){
                     imageViewList[i] =new ImageView();
                     imageViewList[i].setImage(new Image(Launcher.class.getResource(equipmentArray.get(i).getImgpath()).toString()));
                     int finalI = i;
@@ -48,8 +48,13 @@ public class InventoryPane extends ScrollPane {
                         @Override
                                 public void handle(DragEvent event) {onEquipDone(event);}
                     });
+                    //If dropping an item out of the item slot, put it back to the inventory list
+                    //condition 1: item => dragged item is not accepted,put it back
+                    //condition 2: item => dragged item into a pane or scene, put it back
 
                 }
+
+
                 inventoryInfoPane.getChildren().addAll(imageViewList);
             }
             else { System.out.print("There is no item in the inventory.");}

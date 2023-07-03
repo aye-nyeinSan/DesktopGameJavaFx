@@ -63,7 +63,7 @@ public class Launcher extends Application {
     }
     public static BasedCharacter getMainCharacter() {return mainCharacter; }
     public static void setMainCharacter(BasedCharacter mainCharacter) {Launcher.mainCharacter = mainCharacter;}
-    public static Weapon getEquippedWeapon() {
+    public static Weapon getEquippedWeapon(BasedCharacter character) {
         return equippedWeapon;
     }
 
@@ -71,12 +71,13 @@ public class Launcher extends Application {
         equippedWeapon = equippedWeapons;
     }
 
-    public static Armor getEquippedArmor() {
+    public static Armor getEquippedArmor(BasedCharacter character) {
         return equippedArmor;
     }
 
     public static void setEquippedArmor(Armor equippedArmors) {
         equippedArmor = equippedArmors;
+
     }
 
     public static ArrayList<BasedEquipment> getAllEquipment() {

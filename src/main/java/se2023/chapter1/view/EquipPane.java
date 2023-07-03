@@ -1,8 +1,10 @@
 package se2023.chapter1.view;
 
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
@@ -11,6 +13,7 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import se2023.chapter1.controller.AllCustomHandler;
 import se2023.chapter1.model.item.Armor;
 import se2023.chapter1.model.item.BasedEquipment;
 import se2023.chapter1.model.item.Weapon;
@@ -20,15 +23,15 @@ import static se2023.chapter1.controller.AllCustomHandler.GenCharacterHandler.on
 import static se2023.chapter1.controller.AllCustomHandler.GenCharacterHandler.onDragOver;
 
 public class EquipPane extends ScrollPane {
-    private Weapon equippedWeapon;
-    private Armor equippedArmor;
+    private static Weapon equippedWeapon;
+    private static Armor equippedArmor;
 
 
 
 
     public EquipPane() {
     }
-    private Pane getDetailsPane(){
+    private static Pane getDetailsPane(){
         Pane equipmentInfoPane = new VBox(10);
         equipmentInfoPane.setBorder(null);
         ((VBox) equipmentInfoPane).setAlignment(Pos.CENTER);
@@ -63,6 +66,9 @@ public class EquipPane extends ScrollPane {
             armorLbl = new Label("Armor:");
             armorImg.setImage(new Image(Launcher.class.getResource("assets/blank.png").toString()));
         }
+        Button unequip= new Button();
+        unequip.setText("Remove Items");
+        unequip.setOnAction(new AllCustomHandler.EquipmentHandler());
 
 
         weaponImgGroup.setOnDragOver(new EventHandler<DragEvent>() {
@@ -82,17 +88,18 @@ public class EquipPane extends ScrollPane {
 
 
 
-        equipmentInfoPane.getChildren().addAll(weaponLbl,weaponImgGroup,armorLbl,armorImgGroup);
+        equipmentInfoPane.getChildren().addAll(weaponLbl,weaponImgGroup,armorLbl,armorImgGroup,unequip);
         return equipmentInfoPane;
 
 
     }
-    public void drawPane(Weapon equippedWeapon,Armor equippedArmor){
-        this.equippedArmor = equippedArmor;
-        this.equippedWeapon = equippedWeapon;
+    public void drawPane(Weapon equippedWeapon, Armor equippedArmor){
+         this.equippedArmor = equippedArmor;
+          this.equippedWeapon = equippedWeapon;
 
         Pane equipmentInfo = getDetailsPane();
         this.setStyle("-fx-background-color:Red;");
         this.setContent(equipmentInfo);
+
     }
 }
