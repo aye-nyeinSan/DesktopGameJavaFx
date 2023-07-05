@@ -10,6 +10,8 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
+import javafx.scene.input.MouseDragEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -19,8 +21,7 @@ import se2023.chapter1.model.item.BasedEquipment;
 import se2023.chapter1.model.item.Weapon;
 import se2023.chapter1.Launcher;
 
-import static se2023.chapter1.controller.AllCustomHandler.GenCharacterHandler.onDragDropped;
-import static se2023.chapter1.controller.AllCustomHandler.GenCharacterHandler.onDragOver;
+import static se2023.chapter1.controller.AllCustomHandler.GenCharacterHandler.*;
 
 public class EquipPane extends ScrollPane {
     private static Weapon equippedWeapon;
@@ -81,12 +82,36 @@ public class EquipPane extends ScrollPane {
 
         weaponImgGroup.setOnDragDropped(new EventHandler<DragEvent>() {
             @Override
-                public void handle(DragEvent e) {onDragDropped(e,weaponLbl,weaponImgGroup); }});
+                public void handle(DragEvent e) { onDragDropped(e,weaponLbl,weaponImgGroup); }});
         armorImgGroup.setOnDragDropped(new EventHandler<DragEvent>() {
             @Override
-            public void handle(DragEvent e) {onDragDropped(e,armorLbl,armorImgGroup); }});
+            public void handle(DragEvent e) { onDragDropped(e,armorLbl,armorImgGroup); }});
 
-
+       weaponImgGroup.setOnDragDetected(new EventHandler<MouseEvent>() {
+           @Override
+           public void handle(MouseEvent e) {
+               onDragDetected(e,equippedWeapon,weaponImg);
+           }
+       });
+       //put item back to inventory after dragging outside of item slot
+       weaponImgGroup.setOnDragDone(new EventHandler<DragEvent>() {
+           @Override
+           public void handle(DragEvent e) {
+               dropDoneItemFromSlot(e,weaponLbl,weaponImgGroup);
+           }
+       });
+        armorImgGroup.setOnDragDone(new EventHandler<DragEvent>() {
+            @Override
+            public void handle(DragEvent e) {
+                dropDoneItemFromSlot(e,armorLbl,armorImgGroup);
+            }
+        });
+        armorImgGroup.setOnDragDetected(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent e) {
+                onDragDetected(e,equippedArmor,armorImg);
+            }
+        });
 
         equipmentInfoPane.getChildren().addAll(weaponLbl,weaponImgGroup,armorLbl,armorImgGroup,unequip);
         return equipmentInfoPane;

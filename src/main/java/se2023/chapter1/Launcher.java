@@ -2,6 +2,7 @@ package se2023.chapter1;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -34,6 +35,7 @@ public class Launcher extends Application {
     @Override
     public  void start(Stage stage) throws Exception{
         stage.setTitle("Intro to RPG");
+        stage.getIcons().add(new Image(Launcher.class.getResource("assets/epic.jpg").toString()));
         stage.setResizable(false); // cannot resize the whole scene
 
         mainCharacter= GenCharacter.setUpCharacter();
@@ -63,7 +65,7 @@ public class Launcher extends Application {
     }
     public static BasedCharacter getMainCharacter() {return mainCharacter; }
     public static void setMainCharacter(BasedCharacter mainCharacter) {Launcher.mainCharacter = mainCharacter;}
-    public static Weapon getEquippedWeapon(BasedCharacter character) {
+    public static Weapon getEquippedWeapon() {
         return equippedWeapon;
     }
 
@@ -71,7 +73,7 @@ public class Launcher extends Application {
         equippedWeapon = equippedWeapons;
     }
 
-    public static Armor getEquippedArmor(BasedCharacter character) {
+    public static Armor getEquippedArmor() {
         return equippedArmor;
     }
 
@@ -84,8 +86,8 @@ public class Launcher extends Application {
         return allEquipments;
     }
 
-    public static void setAllEquipment(ArrayList<BasedEquipment> allEquipments) {
-        allEquipments = allEquipments;
+    public static void setAllEquipment(ArrayList<BasedEquipment> allEquipment) {
+        allEquipments = allEquipment;
     }
 
 }
