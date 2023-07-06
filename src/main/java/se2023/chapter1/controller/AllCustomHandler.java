@@ -123,6 +123,7 @@ public class AllCustomHandler {
         }
 
         public static void onEquipDone(DragEvent event) { //to remove the dragged-item in inventory pane
+            ImageView imgView=new ImageView();
             Dragboard dragboard = event.getDragboard();
             ArrayList<BasedEquipment> allEquipments = Launcher.getAllEquipment();
             BasedEquipment retrievedEquipment = (BasedEquipment)dragboard.getContent(BasedEquipment.DATA_FORMAT);
@@ -132,14 +133,13 @@ public class AllCustomHandler {
                     pos= i;
                 }
             }
-                if(pos!= -1) {
+
+                if(pos!= -1 && event.isDropCompleted()) {
                     allEquipments.remove(pos);}
 
-            ImageView imgView=new ImageView();
+
             imgView.setImage(new Image(Launcher.class.getResource(retrievedEquipment.getImgpath()).toString()));
-                if(event.isDropCompleted()) {
-                  System.out.print(event.isDropCompleted());
-                }
+
                 Launcher.setAllEquipment(allEquipments);
                 Launcher.refreshPane();
 
@@ -163,6 +163,7 @@ public class AllCustomHandler {
 
 
         }
+
 
 
 

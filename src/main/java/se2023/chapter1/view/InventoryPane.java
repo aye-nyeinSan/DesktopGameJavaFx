@@ -56,7 +56,10 @@ public class InventoryPane extends ScrollPane {
 
                         imageViewList[i].setOnDragDone(new EventHandler<DragEvent>() {
                         @Override
-                                public void handle(DragEvent event) {onEquipDone(event);}
+                                public void handle(DragEvent event) {
+                            if(event.isDropCompleted())
+                            { onEquipDone(event);}
+                        }
                     });
                     //If dropping an item out of the item slot, put it back to the inventory list
                     //condition 1: item => dragged item is not accepted,put it back
