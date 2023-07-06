@@ -44,21 +44,16 @@ public class InventoryPane extends ScrollPane {
                             onDragDetected(event,equipmentArray.get(finalI),imageViewList[finalI]);
                         }
                     });
-               /*     imageViewList[i].setOnDragDropped(new EventHandler<DragEvent>() {
-                        @Override
-                        public void handle(DragEvent dragEvent) {
-                           setBacktoInventory(equipmentArray.get(finalI));
-                        }
-                    });*/
+
 
                     //Delete img in inventory when drag done
-
-
-                        imageViewList[i].setOnDragDone(new EventHandler<DragEvent>() {
+                   imageViewList[i].setOnDragDone(new EventHandler<DragEvent>() {
                         @Override
                                 public void handle(DragEvent event) {
-                            if(event.isDropCompleted())
-                            { onEquipDone(event);}
+                            OnDragFailed(event);
+                           if(event.isAccepted())
+                           {onEquipDone(event);}
+
                         }
                     });
                     //If dropping an item out of the item slot, put it back to the inventory list
@@ -89,12 +84,6 @@ public class InventoryPane extends ScrollPane {
             this.setStyle("-fx-background-color:Red;");
             this.setContent(inventoryInfo);
     }
-    public void setBacktoInventory(BasedEquipment equipment) {
-        // Add the equipment back to the inventory list
-        equipmentArray.add(equipment);
-        Pane inventoryInfo = getDetailsPane();
-        this.setStyle("-fx-background-color:Red;");
-        this.setContent(inventoryInfo);
-        }
+
 
 }
